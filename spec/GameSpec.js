@@ -1,27 +1,23 @@
-'use-strict';
+describe('Game', function() {
 
-describe('Game', function(){
   beforeEach(function(){
-    game = new Game()
-    frame = new Frame()
-    roll1 = new Roll(1)
-    roll2 = new Roll(5)
+    game = new Game();
+    frame = new Frame();
+    roll1 = new Roll(5);
+    roll2 = new Roll(3);
     frame.addRoll(roll1)
     frame.addRoll(roll2)
-  })
+  });
 
-  it('Has an array of frames', function(){
+  it('has initially empty frames array', function(){
     expect(game.frames()).toEqual([])
-  })
+  });
 
-
-  describe('AddFrame', function(){
-
+  describe('#addFrame', function(){
     it('adds a frame to the frames array', function(){
       game.addFrame(frame)
       expect(game.frames()).toContain(frame)
     })
+  });
 
-
-  })
-})
+});

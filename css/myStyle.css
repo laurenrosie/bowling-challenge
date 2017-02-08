@@ -1,0 +1,87 @@
+#heading {
+  text-align: center;
+  color: red;
+  margin-top: 50px;
+font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+font-size: 40px
+}
+
+#start-game{
+  text-align: center;
+  margin-left: 300px;
+  width: 100px;
+  height: 75px;
+  color: red;
+  font-weight: bold;
+  border-color: red;
+  border-width: 10px;
+
+}
+
+#reset{
+  text-align: center;
+  margin-right: 300px;
+  width: 100px;
+  height: 75px;
+  float: right;
+  color: red;
+  font-weight: bold;
+  border-color: red;
+  border-width: 10px;
+}
+
+
+#score {
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 400px;
+  border-style: double;
+  border-color: red;
+  border-width: 10px;
+  width: 200px;
+  color: white;xs
+
+}
+
+
+#the-form {
+  text-align: center;
+  margin-top: 50px;
+  size: 35;
+  align: center;
+}
+
+#roll-input {
+  height: 50px;
+  width: 50px;
+  font-size: 35px;
+  background:#ccc;
+
+}
+
+/*#roll-submit{
+  font-size: 30;
+  color: red;
+  font-weight: bold;
+  height: 50px;
+}*/
+
+input[type=submit] {
+    padding:5px 15px;
+    background:#ccc;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 30;
+    color: red;
+    font-weight: bold;
+
+}
+
+body {
+  font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
+
+  background-image: url('https://static.pexels.com/photos/4192/sport-alley-ball-game.jpg');
+  background-repeat: no-repeat;
+}
