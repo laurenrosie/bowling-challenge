@@ -6,9 +6,12 @@ font-family: "Arial Black", "Arial Bold", Gadget, sans-serif;
 font-size: 40px
 }
 
+
 #start-game{
-  text-align: center;
-  margin-left: 300px;
+  /*text-align: center;*/
+  position:fixed;
+  top: 20%;
+  left: 20%;
   width: 100px;
   height: 75px;
   color: red;
@@ -19,11 +22,12 @@ font-size: 40px
 }
 
 #reset{
-  text-align: center;
-  margin-right: 300px;
+  /*text-align: center;*/
+  position:fixed;
+  top: 20%;
+  right: 20%;
   width: 100px;
   height: 75px;
-  float: right;
   color: red;
   font-weight: bold;
   border-color: red;
@@ -39,8 +43,11 @@ font-size: 40px
   border-color: red;
   border-width: 10px;
   width: 200px;
-  color: white;xs
-
+  color: white;
+  align: center;
+  position:fixed;
+  bottom: 50%;
+  right: 38%;
 }
 
 
@@ -48,7 +55,9 @@ font-size: 40px
   text-align: center;
   margin-top: 50px;
   size: 35;
-  align: center;
+  position:fixed;
+  bottom: 30%;
+  left: 45%;
 }
 
 #roll-input {
@@ -56,15 +65,14 @@ font-size: 40px
   width: 50px;
   font-size: 35px;
   background:#ccc;
-
 }
 
-/*#roll-submit{
+#roll-submit{
   font-size: 30;
   color: red;
   font-weight: bold;
   height: 50px;
-}*/
+}
 
 input[type=submit] {
     padding:5px 15px;

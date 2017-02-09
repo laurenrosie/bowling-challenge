@@ -13,6 +13,6 @@ describe('Frame', function() {
     it('adds a roll to the rolls array', function(){
       frame.addRoll(roll)
       expect(frame.rolls()).toContain(roll)
-    })
-  })
+    });
+  });
 });

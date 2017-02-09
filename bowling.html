@@ -12,28 +12,32 @@
     <div class='container'>
       <h1 id="heading"> Bowling Score Sheet Generator</h1>
 
+      <div id='whole-main-box'>
       <div class="row" style="margin-top:5em;">
-        <div class="col-md-4 text-right">
+        <div id='game-buttons'class="col-md-4 text-right">
             <button id="start-game" type="button" class="btn btn-success btn-default">Start Game</button>
           <button id="reset" type="button" class="btn btn-warning btn-xs">Restart Game</button>
         </div>
         <div id="score" class="col-md-4 text-center">
-          <h2 id="frame-display">Frame: 0</h2>
-          <h2 id="roll-display">Roll: 0</h2>
-
+          <h2 id="frame-display"> </h2>
+          <h2 id="roll-display"> </h2>
+        </div>
         </div>
         <div  id="the-form" class="col-md-4 text-left">
-          <form method="post">
-            <input id='roll-input' type='float' name='roll'>
+          <form id ="entry" method="post">
+            <input id='roll-input' type='float' name='roll-input'>
+            <div>
             <input id='roll-submit' type='submit' value='Submit Latest Roll'>
+          </div>
           </form>
         </div>
       </div>
     </div>
+  </div>
     <script src="src/Game.js"></script>
     <script src="src/Frame.js"></script>
     <script src="src/Roll.js"></script>
     <script src="src/jquery.js"></script>
-    <script src="src/bowlingInterface.js"></script>
+    <script src="bowlingInterface.js"></script>
   </body>
 </html>
