@@ -1,23 +1,23 @@
 $( document ).ready(function() {
 
   var game = null;
-  var current_roll = 0;
-  var current_frame = 0;
+  var current_roll_number = 0;
+  var current_frame_number = 0;
+  var currentFrame = null;
 
-
-  $("h2#frame-display").text("Frame: " + current_frame.toString() );
-  $("h2#roll-display").text("Roll: " + current_roll.toString());
+  $("h2#frame-display").text("Frame: " + current_frame_number.toString() );
+  $("h2#roll-display").text("Roll: " + current_roll_number.toString());
 
   $("button#start-game").click(function(){
     game = new Game();
-    current_roll = 1;
-    current_frame = 1;
+    current_roll_number = 1;
+    current_frame_number = 1;
     updateStats();
   });
 
   $("button#reset").click(function(){
-    current_roll = 0;
-    current_frame = 0;
+    current_roll_number = 0;
+    current_frame_number = 0;
     game = null;
     updateStats();
   });
@@ -26,29 +26,29 @@ $( document ).ready(function() {
 
     $('form#entry').submit( function(e) {
           $.ajax({
-           data: $("input#roll-input").val(),
-           success: function (data) {
-             roll = new Roll(data)
-             frame = new Frame()
-             current_roll += 1
-             updateStats()
+            success: function () {
+              roll = new Roll(parseInt($('input#roll-input').val()))
+              if(currentFrame!=null){
+                 frame = currentFrame
+              }else {
+                 frame = new Frame()
+
+              }
+              currentFrame = frame
+              frame.addRoll(roll)
+              current_roll_number += 1
+              console.log(roll)
+              console.log(frame)
+              updateStats()
            }
        });
        e.preventDefault();
-
-
       });
 
-  // $("form#entry").submit(function(pins){
-  //   roll = new(pins)
-  //   frame = new Frame()
-  //   current_roll += 1
-  //   updateStats()
-  // });
 
 function updateStats(){
-  $("h2#frame-display").text("Frame: " + current_frame.toString() );
-  $("h2#roll-display").text("Roll: " + current_roll.toString());
+  $("h2#frame-display").text("Frame: " + current_frame_number.toString() );
+  $("h2#roll-display").text("Roll: " + current_roll_number.toString());
 
 }
 
