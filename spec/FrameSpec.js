@@ -15,4 +15,11 @@ describe('Frame', function() {
       expect(frame.rolls()).toContain(roll)
     });
   });
+
+  describe('#getRoll', function(){
+    it('adds a roll to the rolls array', function(){
+      frame.addRoll(roll)
+      expect(frame.getRoll(1)).toEqual(roll)
+    });
+  });
 });

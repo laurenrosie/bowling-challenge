@@ -87,13 +87,10 @@ font-size: 40px
 
 #scorecard{
   color: black;
-  position:fixed;
-  bottom: 20%;
-  left: 35%;
   text-align: center;
 }
 
-#table{
+#myTable{
   background-color: #ccc;
 }
 

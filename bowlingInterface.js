@@ -15,7 +15,6 @@ $( document ).ready(function() {
 
   $("button#start-game").click(function(){
     currentGame = new Game();
-    console.log(currentGame)
     current_roll_number = 1;
     current_frame_number = 1;
     updateStats();
@@ -41,9 +40,6 @@ $( document ).ready(function() {
                 currentFrame = checkFrame()
                 currentFrame.addRoll(roll)
                 current_roll_number += 1
-                console.log(roll)
-                console.log(currentFrame)
-                console.log(currentGame)
                 updateStats()
             }
            }
@@ -78,10 +74,24 @@ function isOver(){
   }
 }
 
-
 $("button#show-scorecard").click(function(){
   $('button#show-scorecard').hide()
+  fillInCard()
   $('#scorecard').show()
-});
+})
+
+
+function fillInCard(){
+  for(i=1; i<11; i++){
+    var theFrame = currentGame.frames()[i-1]
+    var theRoll = theFrame.rolls().shift()
+    var pinsScored = String(theRoll.pins())
+    var currentTotal = 0
+    $('#myTable').append("<tr><td>" + String(i) + "</td><td>"+String(1)+"</td><td>"+ pinsScored+"</td><td>"+currentTotal+"</td></tr>")
+    theRoll = theFrame.rolls().shift()
+    pinsScored = String(theRoll.pins())
+    $('#myTable').append("<tr><td>" + String(i) + "</td><td>"+String(2)+"</td><td>"+ pinsScored+"</td><td>"+currentTotal+"</td></tr>")
+  }
+}
 
 });

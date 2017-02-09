@@ -16,3 +16,12 @@ Game.prototype.addFrame = function (frame) {
   this._frames.push(frame)
   this._currentFrame+=1
 };
+
+
+Game.prototype.generateTotals = function () {
+  array = []
+  for(i=1; i<11; i++){
+    array.push([0,0])
+  }
+  return array
+};
