@@ -20,8 +20,35 @@ Game.prototype.addFrame = function (frame) {
 
 Game.prototype.generateTotals = function () {
   array = []
-  for(i=1; i<11; i++){
-    array.push([0,0])
+  runningTotal=0
+  length = this._frames.length
+  for(i=0; i<length; i++){
+      theFrame = this._frames.shift()
+      if(theFrame.isStrike()){
+        nextTwoRolls = this.getNextTwoRolls(this._frames)
+        nextFrameScore = nextTwoRolls[0].pins()+nextTwoRolls[1].pins()
+        roll1Score = runningTotal + 10 + nextFrameScore
+        roll2Score = roll1Score
+      }else if(theFrame.isSpare()){
+        nextTwoRolls = this.getNextTwoRolls(this._frames)
+        roll1Score = runningTotal + theFrame.rolls()[0].pins()
+        roll2Score = roll1Score + theFrame.rolls()[1].pins() + nextTwoRolls[1].pins()
+      }else{
+        roll1Score = runningTotal+theFrame.rolls()[0].pins()
+        roll2Score = roll1Score + theFrame.rolls()[1].pins()
+      }
+      runningTotal = roll2Score
+      array.push([roll1Score, roll2Score])
   }
   return array
+};
+
+
+Game.prototype.getNextTwoRolls = function (frames) {
+      if(frames[0].isStrike()){
+        rolls = [frames[0].rolls()[0], frames[1].rolls()[0]]
+      }else{
+        rolls = frames[0].rolls()
+      }
+    return rolls
 };

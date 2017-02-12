@@ -2,6 +2,7 @@ $( document ).ready(function() {
 
   $('#show-scorecard').hide()
   $('#scorecard').hide()
+  $('#the-form').hide()
 
 
   var game = null;
@@ -14,9 +15,8 @@ $( document ).ready(function() {
   $("h2#roll-display").text("Roll: " + current_roll_number.toString());
 
   $("button#start-game").click(function(){
+    $('#the-form').show()
     currentGame = new Game();
-    current_roll_number = 1;
-    current_frame_number = 1;
     updateStats();
   });
 
@@ -32,16 +32,22 @@ $( document ).ready(function() {
     $('form#entry').submit( function(e) {
           $.ajax({
             success: function () {
-              if(isOver()){
-                $('form#entry').hide()
-                $('button#show-scorecard').show()
-              }else{
+              // if(isOver()){
+              //   $('form#entry').hide()
+              //   $('#whole-main-box').hide()
+              //   $('button#show-scorecard').show()
+              // }else{
                 roll = new Roll(parseInt($('input#roll-input').val()))
                 currentFrame = checkFrame()
                 currentFrame.addRoll(roll)
                 current_roll_number += 1
                 updateStats()
-            }
+            // }
+              if(isOver()){
+                $('form#entry').hide()
+                $('#whole-main-box').hide()
+                $('button#show-scorecard').show()
+              }
            }
        });
        e.preventDefault();
@@ -57,21 +63,25 @@ function checkFrame(){
   if(currentFrame!=null&&currentFrame.rolls().length<2){
      return currentFrame
   }else if(currentFrame!=null&&currentFrame.rolls().length==2){
-      currentGame.addFrame(currentFrame)
-      current_frame_number+=1
-      return new Frame()
+      if(currentGame.frames().length==9 && currentFrame.isStrike()){
+        return currentFrame
+      }else{
+        currentGame.addFrame(currentFrame)
+        current_frame_number+=1
+        return new Frame()
+    }
   }else {
-    current_frame_number+=1
+    if(currentFrame==0){
      return new Frame()
-  }
+   }else{
+     current_frame_number+=1
+     return new Frame()
+   }
+ }
 }
 
 function isOver(){
-  if(currentGame!=null&&currentGame.frames().length==10){
-    return true
-  }else{
-    return false
-  }
+  return (currentGame!=null&&currentGame.frames().length==10)
 }
 
 $("button#show-scorecard").click(function(){
