@@ -19,16 +19,11 @@ Frame.prototype.isStrike = function () {
   return (roll1.pins()==10)
 };
 
-Frame.prototype.totalPins = function () {
-
-  return this._rolls[0].pins() + this._rolls[1].pins()
-};
-
 Frame.prototype.isSpare = function () {
   total = this.rolls()[0].pins() + this.rolls()[1].pins()
-  if(total==10){
-    return true
-  }else{
-    return false
-  }
+  return total==10
+};
+
+Frame.prototype.totalPins = function () {
+  return this._rolls[0].pins() + this._rolls[1].pins()
 };
