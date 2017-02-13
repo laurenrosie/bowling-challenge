@@ -25,27 +25,23 @@ Game.prototype.generateTotals = function () {
   currentFrames = this.copyFrames()
 
   for(i=0; i<length; i++){
-
       theFrame = currentFrames.shift()
-
-      if(theFrame.isStrike()){
-        frameScores = this.strikeScore(currentFrames, runningTotal)
-
-      }else if(theFrame.isSpare()){
-
-        frameScores = this.spareScore(theFrame, currentFrames, runningTotal)
-
-      }else{
-
-        frameScores = this.normalScore(theFrame, runningTotal)
-
-      }
-
+      frameScores = this.calculateFrameScore(theFrame, currentFrames, runningTotal)
       runningTotal = frameScores[1]
       array.push(frameScores)
   }
-  console.log(this)
+
   return array
+};
+
+Game.prototype.calculateFrameScore=function(theFrame, currentFrames, runningTotal){
+  if(theFrame.isStrike()){
+    return this.strikeScore(currentFrames, runningTotal)
+  }else if(theFrame.isSpare()){
+    return this.spareScore(theFrame, currentFrames, runningTotal)
+  }else{
+    return this.normalScore(theFrame, runningTotal)
+  }
 };
 
 Game.prototype.copyFrames = function () {
