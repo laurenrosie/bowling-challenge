@@ -20,7 +20,7 @@ $( document ).ready(function() {
     updateFrameAndRoll();
   });
 
-    $('form#entry').submit( function(e) {
+  $('form#entry').submit( function(e) {
           $.ajax({
             success: function () {
 
@@ -33,8 +33,15 @@ $( document ).ready(function() {
            }
        });
        e.preventDefault();
-      });
+    });
 
+  $("button#show-scorecard").click(function(){
+        $('button#show-scorecard').hide()
+        fillInCard()
+        $('#scorecard').show()
+  })
+
+//functions to facilitate above
 
 function updateFrameAndRoll(){
 
@@ -87,16 +94,9 @@ function newFrameOrFinalFrame(){
 
 }
 
-
 function isOver(){
   return (currentGame!=null&&currentGame.frames().length==10)
 }
-
-$("button#show-scorecard").click(function(){
-  $('button#show-scorecard').hide()
-  fillInCard()
-  $('#scorecard').show()
-})
 
 
 function fillInCard(){
