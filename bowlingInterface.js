@@ -59,33 +59,28 @@ function finalView(){
 
 
 function checkFrame(){
-
-  if(currentFrame!=null&&currentFrame.rolls().length<2){
-
+  if(currentFrame&&currentFrame.rolls().length<2){
      return currentFrame
-
-  }else if(currentFrame!=null&&currentFrame.rolls().length==2){
-
+  }else if(currentFrame&&currentFrame.rolls().length==2){
       return finalRollCase()
-
   }else {
-
-    if(currentFrame==null){
-      return new Frame()
-    }else{
-      console.log('add frame')
-      currentGame.addFrame(currentFrame)
-      return new Frame()
-    }
-
+    return firstFrameorNewFrame(currentFrame)
  }
+}
+
+function firstFrameorNewFrame(currentFrame){
+  if(currentFrame==null){
+    return new Frame()
+  }else{
+    currentGame.addFrame(currentFrame)
+    return new Frame()
+  }
 }
 
 function finalRollCase(){
   if(currentGame.frames().length==9 && currentFrame.isStrike()){
     return currentFrame
   }else{
-    console.log('add frame')
     currentGame.addFrame(currentFrame)
     return new Frame()
   }
@@ -106,17 +101,11 @@ $("button#show-scorecard").click(function(){
 
 function fillInCard(){
   totalsArray = currentGame.generateTotals()
-  console.log(currentGame)
   listFrames = currentGame.frames()
-  console.log(listFrames)
   for(i=1; i<11; i++){
-    theTotals = totalsArray[i-1]
     thisFrame = listFrames[i-1]
-    theRolls = thisFrame.rolls()
-    roll1pins = theRolls[0].pins()
-    roll2pins = theRolls[1].pins()
-    $('#myTable').append("<tr><td>" + String(i) + "</td><td>"+String(1)+"</td><td>"+ String(roll1pins)+"</td><td>"+String(theTotals[0])+"</td></tr>")
-    $('#myTable').append("<tr><td>" + String(i) + "</td><td>"+String(2)+"</td><td>"+ String(roll2pins)+"</td><td>"+String(theTotals[1])+"</td></tr>")
+    $('#myTable').append("<tr><td>" + String(i) + "</td><td>"+String(1)+"</td><td>"+ String(thisFrame.rolls()[0].pins())+"</td><td>"+String(totalsArray[i-1][0])+"</td></tr>")
+    $('#myTable').append("<tr><td>" + String(i) + "</td><td>"+String(2)+"</td><td>"+ String(thisFrame.rolls()[0].pins())+"</td><td>"+String(totalsArray[i-1][1])+"</td></tr>")
   }
 }
 
