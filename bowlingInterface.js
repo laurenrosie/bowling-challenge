@@ -62,7 +62,7 @@ function checkFrame(){
   if(currentFrame&&currentFrame.rolls().length<2){
      return currentFrame
   }else if(currentFrame&&currentFrame.rolls().length==2){
-      return finalRollCase()
+      return newFrameOrFinalFrame()
   }else {
     return firstFrameorNewFrame(currentFrame)
  }
@@ -77,7 +77,7 @@ function firstFrameorNewFrame(currentFrame){
   }
 }
 
-function finalRollCase(){
+function newFrameOrFinalFrame(){
   if(currentGame.frames().length==9 && currentFrame.isStrike()){
     return currentFrame
   }else{
