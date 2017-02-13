@@ -22,27 +22,60 @@ Game.prototype.generateTotals = function () {
   array = []
   runningTotal=0
   length = this._frames.length
+  currentFrames = this.copyFrames()
+
   for(i=0; i<length; i++){
-      theFrame = this._frames.shift()
+
+      theFrame = currentFrames.shift()
+
       if(theFrame.isStrike()){
-        nextTwoRolls = this.getNextTwoRolls(this._frames)
-        nextFrameScore = nextTwoRolls[0].pins()+nextTwoRolls[1].pins()
-        roll1Score = runningTotal + 10 + nextFrameScore
-        roll2Score = roll1Score
+        frameScores = this.strikeScore(currentFrames, runningTotal)
+
       }else if(theFrame.isSpare()){
-        nextTwoRolls = this.getNextTwoRolls(this._frames)
-        roll1Score = runningTotal + theFrame.rolls()[0].pins()
-        roll2Score = roll1Score + theFrame.rolls()[1].pins() + nextTwoRolls[1].pins()
+
+        frameScores = this.spareScore(theFrame, currentFrames, runningTotal)
+
       }else{
-        roll1Score = runningTotal+theFrame.rolls()[0].pins()
-        roll2Score = roll1Score + theFrame.rolls()[1].pins()
+
+        frameScores = this.normalScore(theFrame, runningTotal)
+
       }
-      runningTotal = roll2Score
-      array.push([roll1Score, roll2Score])
+
+      runningTotal = frameScores[1]
+      array.push(frameScores)
+  }
+  console.log(this)
+  return array
+};
+
+Game.prototype.copyFrames = function () {
+  array = []
+  length = (this.frames().length)
+  for(i=0; i<length; i++){
+    array.push(this.frames()[i])
   }
   return array
 };
 
+Game.prototype.normalScore = function (theFrame, runningTotal) {
+  roll1Score = runningTotal + theFrame.rolls()[0].pins()
+  roll2Score = roll1Score + theFrame.rolls()[1].pins()
+  return [roll1Score, roll2Score]
+
+};
+Game.prototype.strikeScore= function(currentFrames, runningTotal){
+    nextTwoRolls = this.getNextTwoRolls(currentFrames)
+    nextFrameScore = nextTwoRolls[0].pins()+nextTwoRolls[1].pins()
+    roll1Score = runningTotal + 10 + nextFrameScore
+    return [roll1Score, roll1Score]
+};
+
+Game.prototype.spareScore = function(theFrame, currentFrames, runningTotal){
+      nextTwoRolls = this.getNextTwoRolls(currentFrames)
+      roll1Score = runningTotal + theFrame.rolls()[0].pins()
+      roll2Score = roll1Score + theFrame.rolls()[1].pins() + nextTwoRolls[1].pins()
+      return [roll1Score, roll2Score]
+};
 
 Game.prototype.getNextTwoRolls = function (frames) {
       if(frames[0].isStrike()){

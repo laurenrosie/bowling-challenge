@@ -12,35 +12,35 @@ $( document ).ready(function() {
   $("button#start-game").click(function(){
     $('#the-form').show()
     currentGame = new Game();
-    updateStats();
+    updateFrameAndRoll();
   });
 
   $("button#reset").click(function(){
     game = null;
-    updateStats();
+    updateFrameAndRoll();
   });
 
     $('form#entry').submit( function(e) {
           $.ajax({
             success: function () {
 
-                roll = new Roll(parseInt($('input#roll-input').val()))
+                newRoll = new Roll(parseInt($('input#roll-input').val()))
                 currentFrame = checkFrame()
-                currentFrame.addRoll(roll)
-                // current_roll_number += 1
-                updateStats()
+                currentFrame.addRoll(newRoll)
+                updateFrameAndRoll()
 
-              if(isOver()){ finalView()}
+                if(isOver()){ finalView()}
            }
        });
-
        e.preventDefault();
       });
 
 
-function updateStats(){
+function updateFrameAndRoll(){
+
   currentFrameNumber = currentGame.frames().length+1
-  if(currentFrame ==null){
+
+  if(currentFrame == null){
     currentRollNumber=1
   }else{
     currentRollNumber = currentFrame.rolls().length
@@ -55,7 +55,6 @@ function finalView(){
   $('#whole-main-box').hide()
   $('button#show-scorecard').show()
   $('button#new-game').show()
-
 }
 
 
@@ -70,12 +69,15 @@ function checkFrame(){
       return finalRollCase()
 
   }else {
+
     if(currentFrame==null){
       return new Frame()
     }else{
+      console.log('add frame')
       currentGame.addFrame(currentFrame)
       return new Frame()
     }
+
  }
 }
 
@@ -83,6 +85,7 @@ function finalRollCase(){
   if(currentGame.frames().length==9 && currentFrame.isStrike()){
     return currentFrame
   }else{
+    console.log('add frame')
     currentGame.addFrame(currentFrame)
     return new Frame()
   }
@@ -103,7 +106,9 @@ $("button#show-scorecard").click(function(){
 
 function fillInCard(){
   totalsArray = currentGame.generateTotals()
+  console.log(currentGame)
   listFrames = currentGame.frames()
+  console.log(listFrames)
   for(i=1; i<11; i++){
     theTotals = totalsArray[i-1]
     thisFrame = listFrames[i-1]
