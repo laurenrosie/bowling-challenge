@@ -20,6 +20,11 @@ $( document ).ready(function() {
     updateFrameAndRoll();
   });
 
+  $("button#new-game").click(function(){
+    game = null;
+    updateFrameAndRoll();
+  });
+
   $('form#entry').submit( function(e) {
           $.ajax({
             success: function () {
@@ -41,18 +46,14 @@ $( document ).ready(function() {
         $('#scorecard').show()
   })
 
-//functions to facilitate above
-
 function updateFrameAndRoll(){
 
   currentFrameNumber = currentGame.frames().length+1
-
   if(currentFrame == null){
     currentRollNumber=1
   }else{
     currentRollNumber = currentFrame.rolls().length
   }
-
   $("h2#frame-display").text("Frame: " + currentFrameNumber.toString() );
   $("h2#roll-display").text("Roll: " + currentRollNumber.toString());
 }
